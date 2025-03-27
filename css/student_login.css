@@ -16,41 +16,6 @@ body {
     background-color: #f4f4f4;
 }
 
-/* Header */
-#header {
-    width: 100%;
-    background-color: #007bff;
-    color: white;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 30px;
-}
-
-#logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-}
-
-#logins {
-    list-style: none;
-    display: flex;
-}
-
-#logins li {
-    margin-left: 20px;
-}
-
-#logins a {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-#logins a:hover {
-    text-decoration: underline;
-}
-
 /* Main login container */
 #student-login-container {
     display: flex;

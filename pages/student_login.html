@@ -6,19 +6,20 @@
         <title>Student Login</title>
         <link rel="stylesheet" href="../css/student_login.css" />
         <link rel="stylesheet" href="../css/header.css" />
+        <script defer src="../js/student_login.js"></script>
     </head>
     <body>
         <header id="header">
             <div id="logo">Learning Management System</div>
             <ul id="logins">
                 <li><a href="../index.html">Home</a></li>
-                <li><a href="pages/teacher_login.html">Teacher Login</a></li>
+                <li><a href="teacher_login.html">Teacher Login</a></li>
             </ul>
         </header>
         <main id="student-login-container">
             <div id="login">
                 <h1>Student Login</h1>
-                <form action="student_dashboard.html" method="post">
+                <form id="login-form">
                     <label for="roll-number">Roll Number</label>
                     <input type="text" name="roll-number" id="roll-number" placeholder="Enter your roll number" />
                     <label for="password">Password</label>

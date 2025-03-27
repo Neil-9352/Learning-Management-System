@@ -1,3 +1,24 @@
+document.addEventListener("DOMContentLoaded", async function () {
+    const courseSelect = document.getElementById("course");
+
+    try {
+        const response = await fetch("/get_courses");
+        const courses = await response.json();
+
+        // Clear existing options and add a default one
+        courseSelect.innerHTML = '<option value="">Select a course</option>';
+
+        courses.forEach((course) => {
+            const option = document.createElement("option");
+            option.value = course.cid; // Course ID as value
+            option.textContent = course.cname; // Course Name as display text
+            courseSelect.appendChild(option);
+        });
+    } catch (error) {
+        console.error("Error loading courses:", error);
+    }
+});
+
 const form = document.getElementById("register-form");
 
 form.addEventListener("submit", async (event) => {
@@ -42,6 +63,7 @@ form.addEventListener("submit", async (event) => {
         if (response.ok) {
             alert("Registration successful!");
             form.reset();
+            window.location.href = "/pages/student_login.html"; // Redirect to login page
         } else {
             alert("Error: " + result.error);
         }
