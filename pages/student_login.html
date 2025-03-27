@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Student Login</title>
+        <link rel="stylesheet" href="../css/student_login.css" />
+        <link rel="stylesheet" href="../css/header.css" />
+    </head>
+    <body>
+        <header id="header">
+            <div id="logo">Learning Management System</div>
+            <ul id="logins">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="pages/teacher_login.html">Teacher Login</a></li>
+            </ul>
+        </header>
+        <main id="student-login-container">
+            <div id="login">
+                <h1>Student Login</h1>
+                <form action="student_dashboard.html" method="post">
+                    <label for="roll-number">Roll Number</label>
+                    <input type="text" name="roll-number" id="roll-number" placeholder="Enter your roll number" />
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" placeholder="Enter your password"/>
+                    <input type="submit" value="Login" />
+                </form>
+                <p>
+                    Not registered?
+                    <a href="student_register.html">Create an account</a>
+                </p>
+            </div>
+        </main>
+        <!-- <footer id="footer">
+            <p>&copy; 2025 Learning Management System</p>
+        </footer> -->
+    </body>
+</html>

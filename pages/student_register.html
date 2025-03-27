@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Student Registration</title>
+        <link rel="stylesheet" href="../css/header.css" />
+        <link rel="stylesheet" href="../css/student_register.css" />
+        <script defer src="../js/student_register.js"></script>
+    </head>
+    <body>
+        <header id="header">
+            <div id="logo">Learning Management System</div>
+            <ul id="logins">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="pages/teacher_login.html">Teacher Login</a></li>
+            </ul>
+        </header>
+
+        <main id="student-register-container">
+            <div id="login">
+                <h1>Student Registration</h1>
+                <form id="register-form">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" placeholder="Enter your name" required />
+
+                    <label for="email">Email</label>
+                    <input type="email" id="email" placeholder="Enter your email" required />
+
+                    <label for="rollNumber">Roll Number</label>
+                    <input type="text" id="rollNumber" placeholder="Enter your roll number" required />
+
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Enter your password" required />
+
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" id="confirmPassword" placeholder="Confirm your password" required />
+
+                    <label for="course">Select Course</label>
+                    <select id="course" required>
+                        <option value="">Select a course</option>
+                        <option value="CS101">
+                            Introduction to Programming
+                        </option>
+                        <option value="CS102">
+                            Data Structures & Algorithms
+                        </option>
+                        <option value="CS103">
+                            Database Management Systems
+                        </option>
+                        <option value="CS104">Operating Systems</option>
+                        <option value="CS105">Computer Networks</option>
+                        <option value="CS106">Artificial Intelligence</option>
+                    </select>
+
+                    <input type="submit" value="Register" />
+                </form>
+                <p>
+                    <a href="student_login.html"
+                        >Already registered? Log in here.</a
+                    >
+                </p>
+            </div>
+        </main>
+    </body>
+</html>
