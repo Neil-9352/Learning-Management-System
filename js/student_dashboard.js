@@ -6,6 +6,24 @@ window.onload = async function () {
             window.location.href = "/pages/student_login.html"; // Redirect if not logged in
         } else {
             document.getElementById("student-name").textContent = data.name;
+
+            const coursesList = document.getElementById("courses-list");
+            coursesList.innerHTML = ""; // Clear any existing courses
+
+            const courseIds = [data.cid1, data.cid2, data.cid3];
+
+            courseIds.forEach(cid => {
+                if (cid) {
+                    const li = document.createElement("li");
+                    const link = document.createElement("a");
+                    link.href = `/pages/course.html?cid=${encodeURIComponent(cid)}`;
+                    link.textContent = cid;
+                    link.className = "course-link"; // Optional: for styling
+
+                    li.appendChild(link);
+                    coursesList.appendChild(li);
+                }
+            });
         }
     } catch (error) {
         console.error("Error fetching student info:", error);

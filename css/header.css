@@ -11,12 +11,13 @@
     background-color: #313D5A;
     position: fixed;
     top: 0;
+    z-index: 99;
 }
 
 #logo {
     font-family: "Roboto Condensed", sans-serif;
     font-size: 1.8rem;
-    color: antiquewhite;
+    color: #faebd7;
     margin: 2rem;
 }
 
@@ -33,5 +34,5 @@
 #logins a {
     text-decoration: none;
     font-family: "Poppins", sans-serif;
-    color: antiquewhite;
+    color: #faebd7;
 }

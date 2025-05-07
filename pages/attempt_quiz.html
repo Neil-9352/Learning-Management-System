@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+        <title>Quiz</title>
+    </head>
+    <body>
+        <h1>Quiz</h1>
+        <div id="quiz-container">
+            <!-- Quiz content will be populated here -->
+        </div>
+
+        <!-- Submit button -->
+        <button
+            id="submit-quiz"
+            class="bg-blue-600 text-white px-4 py-2 rounded-md mt-4"
+        >
+            Submit Quiz
+        </button>
+
+        <script>
+            let rollNumber = null;
+            let teacherCid = null; // Store the teacher's cid
+
+            // Fetch student info
+            fetch("/get_student_info")
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error("Failed to fetch student info");
+                    }
+                    return response.json();
+                })
+                .then((student) => {
+                    rollNumber = student.roll_no; // ✅ Store roll number here
+                    teacherCid = student.cid; // Store the teacher's cid here (from session)
+                })
+                .catch((error) => {
+                    console.error("Error fetching student info:", error);
+                    alert(
+                        "Failed to load student information. Please log in again."
+                    );
+                });
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const quizId = urlParams.get("quiz_id");
+            const cid = urlParams.get("cid");
+
+            let questionIdMapping = {}; // To map display index -> real question ID
+            let correctAnswers = {}; // Store correct answers to check on frontend
+
+            fetch(`/get_quiz/${quizId}`)
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error("Failed to fetch quiz data");
+                    }
+                    return response.json();
+                })
+                .then((data) => {
+                    const quizContainer =
+                        document.getElementById("quiz-container");
+
+                    if (data.questions && Array.isArray(data.questions)) {
+                        let questions = data.questions;
+
+                        // Shuffle the questions array (Fisher-Yates)
+                        for (let i = questions.length - 1; i > 0; i--) {
+                            const j = Math.floor(Math.random() * (i + 1));
+                            [questions[i], questions[j]] = [
+                                questions[j],
+                                questions[i],
+                            ];
+                        }
+
+                        // Take first 10 questions
+                        questions = questions.slice(0, 10);
+
+                        questions.forEach((question, index) => {
+                            const questionDiv = document.createElement("div");
+                            questionDiv.classList.add(
+                                "question",
+                                "mb-4",
+                                "p-4",
+                                "bg-gray-100",
+                                "rounded-lg",
+                                "shadow-md"
+                            );
+
+                            // Map index to original question ID (using index + 1)
+                            questionIdMapping[`q${index + 1}`] = question.qid;
+
+                            // Store the correct answer
+                            correctAnswers[question.qid] = question.correct;
+
+                            // Create question text
+                            const questionText = document.createElement("p");
+                            questionText.classList.add(
+                                "text-lg",
+                                "font-semibold"
+                            );
+                            questionText.textContent = `${index + 1}. ${
+                                question.question
+                            }`;
+                            questionDiv.appendChild(questionText);
+
+                            // Create options
+                            const optionsDiv = document.createElement("div");
+                            optionsDiv.classList.add("options", "mt-2");
+
+                            Object.keys(question.options).forEach(
+                                (optionKey, idx) => {
+                                    const optionLabel =
+                                        document.createElement("label");
+                                    optionLabel.classList.add(
+                                        "block",
+                                        "text-sm",
+                                        "font-medium",
+                                        "text-gray-700"
+                                    );
+
+                                    const radioInput =
+                                        document.createElement("input");
+                                    radioInput.type = "radio";
+                                    radioInput.name = `q${index + 1}`; // Ensure this matches qid in the mapping
+                                    radioInput.value = optionKey;
+                                    radioInput.id = `q${
+                                        index + 1
+                                    }-option${idx}`;
+
+                                    const radioText =
+                                        document.createElement("span");
+                                    radioText.classList.add("ml-2");
+                                    radioText.textContent =
+                                        question.options[optionKey];
+
+                                    optionLabel.appendChild(radioInput);
+                                    optionLabel.appendChild(radioText);
+                                    optionsDiv.appendChild(optionLabel);
+                                }
+                            );
+
+                            questionDiv.appendChild(optionsDiv);
+                            quizContainer.appendChild(questionDiv);
+                        });
+                    } else {
+                        quizContainer.textContent = "Quiz not found.";
+                    }
+                })
+                .catch((error) => {
+                    console.error("Error fetching quiz:", error);
+                    const quizContainer =
+                        document.getElementById("quiz-container");
+                    quizContainer.textContent =
+                        "An error occurred while fetching the quiz data.";
+                });
+
+            // Handle submit quiz
+            document
+                .getElementById("submit-quiz")
+                .addEventListener("click", function () {
+                    const answers = {};
+                    const radioButtons = document.querySelectorAll(
+                        'input[type="radio"]:checked'
+                    );
+
+                    radioButtons.forEach((radio) => {
+                        const questionName = radio.name;
+                        const realQuestionId = questionIdMapping[questionName];
+                        answers[realQuestionId] = radio.value;
+                    });
+
+                    if (Object.keys(answers).length === 0) {
+                        alert(
+                            "Please answer at least one question before submitting."
+                        );
+                        return;
+                    }
+
+                    let score = 0;
+                    let totalQuestions = Object.keys(answers).length;
+
+                    Object.keys(answers).forEach((qid) => {
+                        if (answers[qid] === correctAnswers[qid]) {
+                            score++;
+                        }
+                    });
+
+                    let percentage = (score / totalQuestions) * 100;
+                    alert(
+                        `Quiz submitted! Your score is: ${score}/${totalQuestions} (${percentage.toFixed(
+                            2
+                        )}%)`
+                    );
+
+                    // NOW: rollNumber and teacherCid are available
+                    fetch("/submit_quiz", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            quizId: quizId,
+                            rollNumber: rollNumber,
+                            marks: score,
+                            cid: cid // Send the teacher's cid here
+                        }),
+                    })
+                        .then((response) => response.json())
+                        .then((data) => {
+                            if (data.success) {
+                                console.log("Quiz submitted successfully");
+                                window.location.href =
+                                    "/pages/student_dashboard.html"; // Redirect to dashboard
+                            } else {
+                                console.log(
+                                    "Error submitting quiz: ",
+                                    data.error
+                                );
+                            }
+                        })
+                        .catch((error) => {
+                            console.error("Error submitting quiz:", error);
+                            alert(
+                                "An unexpected error occurred while submitting the quiz."
+                            );
+                        });
+                });
+        </script>
+    </body>
+</html>

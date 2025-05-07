@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link rel="stylesheet" href="/css/teacher_registration.css" />
+        <link rel="stylesheet" href="/css/header.css" />
+        <script defer src="/js/teacher_register.js"></script>
+        <title>Teacher Registration</title>
+    </head>
+    <body>
+        <header id="header">
+            <div id="logo">Learning Management System</div>
+            <ul id="logins">
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="/pages/student_login.html">Student Login</a></li>
+            </ul>
+        </header>
+
+        <main id="teacher-register-container">
+            <div id="login">
+                <h1>Teacher Registration</h1>
+                <form id="register-form">
+                    <label for="name">Name</label>
+                    <input
+                        type="text"
+                        id="name"
+                        placeholder="Enter your name"
+                        required
+                    />
+
+                    <label for="email">Email</label>
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Enter your email"
+                        required
+                    />
+
+                    <label for="username">Username</label>
+                    <input
+                        type="text"
+                        id="username"
+                        placeholder="Enter your username"
+                        required
+                    />
+
+                    <label for="password">Password</label>
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Enter your password"
+                        required
+                    />
+
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input
+                        type="password"
+                        id="confirmPassword"
+                        placeholder="Confirm your password"
+                        required
+                    />
+
+                    <label for="course">Select Course</label>
+                    <select id="course" required>
+                        <option value="">Loading Courses...</option>
+                    </select>
+
+                    <input type="submit" value="Register" />
+                </form>
+
+                <p>
+                    Already registered?
+                    <a href="teacher_login.html">Log in here.</a>
+                </p>
+            </div>
+        </main>
+    </body>
+</html>

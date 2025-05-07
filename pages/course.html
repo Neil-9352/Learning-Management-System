@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Course Page</title>
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    </head>
+    <body class="bg-gray-100">
+        <header class="bg-blue-600 text-white p-4">
+            <h1 class="text-2xl">
+                Welcome, <span id="student-name">Student</span>!
+            </h1>
+            <p>
+                Your session is active. You can access your courses and
+                resources here.
+            </p>
+        </header>
+
+        <main class="container mx-auto p-6">
+            <div id="course-details-container">
+                <h2 class="text-xl font-semibold mb-4">Course Materials</h2>
+
+                <!-- Course materials list -->
+                <div
+                    id="course-materials-container"
+                    class="bg-white p-4 rounded-lg shadow-md mb-8"
+                >
+                    <h3 class="text-lg font-semibold mb-2">Materials</h3>
+                    <ul id="materials-list">
+                        <!-- Materials will be dynamically loaded here -->
+                    </ul>
+                </div>
+
+                <!-- Quizzes Section -->
+                <div
+                    id="course-quizzes-container"
+                    class="bg-white p-4 rounded-lg shadow-md mb-8"
+                >
+                    <h3 class="text-lg font-semibold mb-2">Quizzes</h3>
+                    <ul id="quizzes-list">
+                        <!-- Quizzes will be dynamically loaded here -->
+                    </ul>
+                </div>
+
+                <!-- Ask Doubt Section -->
+                <div
+                    id="ask-doubt-container"
+                    class="bg-white p-4 rounded-lg shadow-md"
+                >
+                    <h3 class="text-lg font-semibold mb-2">Have a Doubt?</h3>
+                    <p class="mb-4">
+                        If you have any doubts regarding the course or
+                        materials, you can ask your instructor by visiting the
+                        chat.
+                    </p>
+                    <a
+                        href=""
+                        class="doubt-link inline-block bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700"
+                    >
+                        Ask a Doubt
+                    </a>
+                </div>
+            </div>
+        </main>
+
+        <script>
+            // Fetch the course data (materials and quizzes) based on the course ID
+            const courseId = new URLSearchParams(window.location.search).get(
+                "cid"
+            ); // Assume cid is passed in the URL query string
+
+            window.onload = async function () {
+                try {
+                    const response = await fetch(`/course/${courseId}`);
+                    const data = await response.json(); // Parse the JSON response
+
+                    console.log("Course Data:", data); // Log the parsed data to check its structure
+
+                    if (data.materials) {
+                        // Display the materials
+                        const materialsList =
+                            document.getElementById("materials-list");
+                        data.materials.forEach((material) => {
+                            const listItem = document.createElement("li");
+                            const link = document.createElement("a");
+                            link.href = material.document;
+                            link.textContent = material.document
+                                .split("/")
+                                .pop();
+                            link.classList.add(
+                                "text-blue-500",
+                                "font-semibold",
+                                "hover:underline",
+                                "hover:text-blue-700"
+                            ); // TailwindCSS classes
+                            listItem.appendChild(link);
+                            materialsList.appendChild(listItem);
+                        });
+                    }
+
+                    if (data.quizzes) {
+                        // Display the quizzes
+                        const quizzesList =
+                            document.getElementById("quizzes-list");
+                        data.quizzes.forEach((quiz) => {
+                            const listItem = document.createElement("li");
+                            const link = document.createElement("a");
+                            link.href = `/pages/attempt_quiz.html?quiz_id=${
+                                quiz.quiz_id
+                            }&cid=${encodeURIComponent(courseId)}`;
+                            link.textContent = `Attempt Quiz ${quiz.quiz_id}`;
+                            link.classList.add(
+                                "text-blue-500",
+                                "font-semibold",
+                                "hover:underline",
+                                "hover:text-blue-700"
+                            ); // TailwindCSS classes
+                            listItem.appendChild(link);
+                            quizzesList.appendChild(listItem);
+                        });
+                    }
+                } catch (error) {
+                    console.error("Error fetching course data:", error);
+                    alert("An error occurred while fetching course data.");
+                }
+            };
+
+            window.addEventListener("DOMContentLoaded", () => {
+                const cid = new URLSearchParams(window.location.search).get(
+                    "cid"
+                );
+                if (cid) {
+                    document.querySelector(
+                        ".doubt-link"
+                    ).href = `/pages/student_chat.html?cid=${encodeURIComponent(
+                        cid
+                    )}`;
+                }
+            });
+        </script>
+    </body>
+</html>

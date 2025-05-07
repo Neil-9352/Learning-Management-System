@@ -3,16 +3,16 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="../css/student_dashboard.css" />
-        <link rel="stylesheet" href="../css/header.css" />
-        <script defer src="../js/student_dashboard.js"></script>
+        <link rel="stylesheet" href="/css/student_dashboard.css" />
+        <link rel="stylesheet" href="/css/header.css" />
+        <script defer src="/js/student_dashboard.js"></script>
         <title>Student Dashboard</title>
     </head>
     <body>
         <header id="header">
             <div id="logo">Learning Management System</div>
             <ul id="logins">
-                <li><a href="../index.html">Home</a></li>
+                <li><a href="/index.html">Home</a></li>
                 <li><a href="#" id="logout-link">Logout</a></li>
             </ul>
         </header>
@@ -22,6 +22,16 @@
                 Your session is active. You can access your courses and
                 resources here.
             </p>
+
+            <div id="course-materials-container">
+                <h2>Your Courses</h2>
+                <ul id="courses-list"></ul>
+            </div>
+
+            <div class="ask-doubts">
+                <h2>Ask Your Doubts</h2>
+                <a href="/pages/student_chat.html">Ask your Doubts</a>
+            </div>
         </main>
     </body>
 </html>

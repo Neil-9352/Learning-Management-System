@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- <link rel="stylesheet" href="/css/teacher_dashboard.css" />
+        <link rel="stylesheet" href="/css/navbar.css" />
+        <link rel="stylesheet" href="/css/header.css" /> -->
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+        <script defer src="/js/teacher_dashboard.js"></script>
+        <title>Teacher Dashboard</title>
+    </head>
+    <body class="bg-gray-100">
+        <!-- Fixed Header -->
+    <header id="header" class="bg-blue-600 text-white p-4 fixed top-0 left-0 w-full z-50 shadow-md">
+        <div class="flex justify-between items-center">
+            <div id="logo" class="text-xl font-bold">Learning Management System</div>
+            <ul id="logins" class="flex space-x-4">
+                <li><a href="../index.html" class="text-white hover:text-gray-200">Home</a></li>
+                <li><a href="#" id="logout-link" class="text-white hover:text-gray-200">Logout</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main" class="flex pt-20 pl-64">
+        <!-- Fixed Side Navigation -->
+        <nav id="nav" class="bg-gray-800 text-white w-64 min-h-screen p-4 fixed top-0 left-0 z-40">
+            <ul class="mt-16 space-y-2">
+                <li><a href="#" class="block py-2 px-4 bg-blue-700 rounded">Courses</a></li>
+                <li><a href="quiz_management.html" class="block py-2 px-4 hover:bg-gray-700 rounded">Quizzes</a></li>
+                <li><a href="quiz_report.html" class="block py-2 px-4 hover:bg-gray-700 rounded">Quiz Report</a></li>
+                <li><a href="teacher_doubts.html" class="block py-2 px-4 hover:bg-gray-700 rounded">Student Doubts</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content Area -->
+        <div id="display" class="flex-1 p-8">
+            <h1 class="text-3xl font-bold text-gray-800">Welcome, <span id="teacher-name" class="text-blue-600">Teacher</span>!</h1>
+
+            <div id="course-materials-container" class="mt-8">
+                <!-- Upload Material Section -->
+                <div id="upload-container" class="bg-white p-6 rounded-lg shadow-md">
+                    <h2 class="text-2xl font-semibold">Upload Material</h2>
+                    <form id="upload-form" class="mt-4" enctype="multipart/form-data">
+                        <input type="file" id="file" name="file" required class="border p-2 rounded-lg" />
+                        <button type="submit" class="mt-4 bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded">
+                            Upload
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Uploaded Materials Section -->
+                <div id="materials-container" class="mt-8">
+                    <h2 class="text-2xl font-semibold">Uploaded Materials</h2>
+                    <ul id="materials-list" class="space-y-4 mt-4">
+                        <!-- Dynamically generated materials list will go here -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+    </body>
+</html>

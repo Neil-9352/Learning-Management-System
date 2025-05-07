@@ -1,0 +1,231 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styling */
+body {
+    font-family: "Poppins", sans-serif;
+    background: #f2f5f9;
+    min-height: 100vh;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#main {
+    display: flex;
+    margin-top: calc(4rem - 20px);
+}
+
+
+
+/* Main container (implicit for form area) */
+#quiz-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    max-width: 900px;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.display {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Headings */
+
+h1 {
+    margin-bottom: 40px;
+    color: #333;
+    text-align: center;
+    /* margin-top: 4rem; */
+}
+
+h2 {
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+    margin-top: 60px;
+}
+
+/* Questions container */
+#questions-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+
+/* Each question block */
+.question-block {
+    background: #fafafa;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    position: relative;
+}
+
+/* Labels */
+.question-block label {
+    font-weight: bold;
+    color: #555;
+}
+
+/* Inputs and selects */
+.question-block input[type="text"],
+.question-block select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    background: #fff;
+    transition: border-color 0.3s;
+}
+
+.question-block input[type="text"]:focus,
+.question-block select:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* Options inside question block */
+.options-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+/* Remove question button */
+.remove-question {
+    align-self: flex-end;
+    background-color: #ff4d4f;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.remove-question:hover {
+    background-color: #d9363e;
+}
+
+/* Button group */
+.button-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.button-group button {
+    width: 200px;
+    padding: 12px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+/* Specific button colors */
+#add-question {
+    background-color: #28a745;
+    color: white;
+}
+
+#add-question:hover {
+    background-color: #218838;
+}
+
+#quiz-form button[type="submit"] {
+    background-color: #007bff;
+    color: white;
+}
+
+#quiz-form button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Uploaded quizzes section */
+#quiz-list {
+    margin-top: 20px;
+    width: 100%;
+    max-width: 900px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.quiz-item {
+    background: #ffffff;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.quiz-item p {
+    font-size: 18px;
+    font-weight: bold;
+    color: #444;
+}
+
+/* Displayed questions inside quiz list */
+.quiz-item .question-block {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    border: none;
+}
+
+/* Horizontal rule */
+.quiz-item hr {
+    margin: 10px 0;
+    border: 0;
+    height: 1px;
+    background: #ddd;
+}
+
+/* Delete quiz button */
+.delete-quiz {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    align-self: flex-end;
+    transition: background-color 0.3s;
+}
+
+.delete-quiz:hover {
+    background-color: #c82333;
+}
+
+/* Utility */
+.text-center {
+    text-align: center;
+}
