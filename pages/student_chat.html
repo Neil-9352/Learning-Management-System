@@ -6,7 +6,7 @@
     <title>Student Chat</title>
     <script defer src="/js/student_chat.js"></script>
     <!-- Include Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/output.css">
 </head>
 <body class="bg-gray-100 font-sans">
 
@@ -32,7 +32,7 @@
         <div id="message-input" class="flex flex-col space-y-4">
             <textarea id="message" class="p-3 border border-gray-300 rounded-lg w-full h-24 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Type your message here..." required></textarea>
             <div class="flex items-center space-x-4">
-                <input type="file" id="image-upload" accept="image/*" class="file:border-gray-300 file:bg-gray-100 file:px-4 file:py-2 file:rounded-lg" />
+                <input type="file" id="image-upload" accept="image/*" class="file:border-gray-300 file:bg-gray-300 file:px-4 file:py-2 file:rounded-lg" />
                 <button id="send-message" class="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
                     Send
                 </button>
