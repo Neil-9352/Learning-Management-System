@@ -16,20 +16,29 @@
     <body class="min-h-screen flex flex-col text-gray-800 font-[Poppins]">
         <!-- Header -->
         <header
-            class="bg-[#313D5A] text-[#faebd7] backdrop-blur-md shadow-md py-4 px-6 flex justify-between items-center fixed w-full z-10"
-        >
-            <div class="text-2xl font-bold font-[Roboto]">
-                Learning Management System
-            </div>
-            <ul class="flex space-x-6 font-medium">
-                <li><a href="/index.html" class="hover:underline">Home</a></li>
-                <li>
-                    <a href="teacher_login.html" class="hover:underline"
-                        >Teacher Login</a
-                    >
-                </li>
-            </ul>
-        </header>
+                id="header"
+                class="flex justify-between items-center w-full h-16 bg-[#313D5A] text-[#FAEBDB] fixed top-0 left-0 z-50 shadow-lg"
+            >
+                <div id="logo" class="text-2xl font-[Poppins] ml-8">
+                    Learning Management System
+                </div>
+                <ul id="logins" class="flex space-x-6 mr-8">
+                    <li class="text-lg font-[Poppins]">
+                        <a
+                            href="/index.html"
+                            class="text-[#FAEBDB] hover:text-gray-200"
+                            >Home</a
+                        >
+                    </li>
+                    <li class="text-lg font-[Poppins]">
+                        <a
+                            href="teacher_login.html"
+                            class="text-[#FAEBDB] hover:text-gray-200"
+                            >Teacher Login</a
+                        >
+                    </li>
+                </ul>
+            </header>
 
         <!-- Registration Form -->
         <main class="flex-grow flex items-center justify-center px-4 bg-gray-200">
@@ -37,7 +46,7 @@
                 class="bg-gray-100 backdrop-blur-md mb-8 mt-[100px] p-8 rounded-xl shadow-xl max-w-xl"
             >
                 <h1
-                    class="text-2xl font-semibold text-center text-blue-700 mb-6"
+                    class="text-2xl font-semibold text-center text-gray-800 mb-6"
                 >
                     Student Registration
                 </h1>

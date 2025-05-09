@@ -1,97 +1,204 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Quiz Report</title>
-    <link rel="stylesheet" href="/css/output.css">
-</head>
-<body class="bg-gray-100 min-h-screen p-6">
-    <div class="max-w-7xl mx-auto bg-white p-6 rounded shadow">
-        <h1 class="text-2xl font-bold mb-4 text-center">Quiz Report</h1>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+            rel="stylesheet"
+        />
+        <title>Quiz Report</title>
+        <link rel="stylesheet" href="/css/output.css" />
+    </head>
+    <body class="bg-gray-100 min-h-screen p-6">
+        <header
+            id="header"
+            class="flex justify-between items-center w-full h-16 bg-[#313D5A] text-[#FAEBDB] fixed top-0 left-0 z-50 shadow-lg"
+        >
+            <div id="logo" class="text-2xl font-[Poppins] ml-8">
+                Learning Management System
+            </div>
+            <ul id="logins" class="flex space-x-6 mr-8">
+                <li class="text-lg font-[Poppins]">
+                    <a
+                        href="/index.html"
+                        class="text-[#FAEBDB] hover:text-gray-200"
+                        >Home</a
+                    >
+                </li>
+                <li class="text-lg font-[Poppins]">
+                    <a href="/logout" class="text-[#FAEBDB] hover:text-gray-200"
+                        >Logout</a
+                    >
+                </li>
+            </ul>
+        </header>
 
-        <!-- Display Teacher's CID -->
-        <div class="text-center mb-4">
-            <span class="font-medium text-gray-700">Teacher's Course ID: </span>
-            <span id="teacherCid" class="text-blue-600 font-bold">Loading...</span>
-        </div>
+        <main id="main" class="flex pt-20 pl-64">
+            <nav
+                id="nav"
+                class="bg-gray-800 text-white w-64 min-h-screen p-4 fixed top-0 left-0 z-40"
+            >
+                <ul class="mt-16 space-y-2">
+                    <li>
+                        <a
+                            href="teacher_dashboard.html"
+                            class="block py-2 px-4 hover:bg-gray-700 rounded"
+                            >Courses</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="quiz_management.html"
+                            class="block py-2 px-4 hover:bg-gray-700 rounded"
+                            >Quizzes</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="quiz_report.html"
+                            class="block py-2 px-4 bg-blue-700 rounded"
+                            >Quiz Report</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="teacher_doubts.html"
+                            class="block py-2 px-4 hover:bg-gray-700 rounded"
+                            >Student Doubts</a
+                        >
+                    </li>
+                </ul>
+            </nav>
 
-        <div class="flex justify-end mb-4">
-            <label for="timeframe" class="mr-2 font-medium text-gray-700">Timeframe:</label>
-            <select id="timeframe" class="border border-gray-300 rounded px-3 py-1">
-                <option value="">All Time</option>
-                <option value="weekly">This Week</option>
-                <option value="monthly">This Month</option>
-            </select>
-        </div>
+            <div class="container mx-auto bg-white p-6 rounded shadow">
+                <h1 class="text-2xl font-bold mb-4 text-center">Quiz Report</h1>
 
-        <div class="overflow-x-auto">
-            <table class="min-w-full bg-white border border-gray-300">
-                <thead class="bg-gray-200 text-gray-700">
-                    <tr>
-                        <th class="px-4 py-2 border">Roll No</th>
-                        <th class="px-4 py-2 border">Name</th>
-                        <th class="px-4 py-2 border">Quiz ID</th>
-                        <th class="px-4 py-2 border">Course ID</th> <!-- New Column -->
-                        <th class="px-4 py-2 border">Marks</th>
-                        <th class="px-4 py-2 border">Submitted At</th>
-                    </tr>
-                </thead>
-                <tbody id="reportBody" class="text-sm text-gray-800">
-                    <!-- Rows will be inserted here -->
-                </tbody>
-            </table>
-        </div>
-    </div>
+                <!-- Display Teacher's CID -->
+                <div class="text-center mb-4">
+                    <span class="font-medium text-gray-700"
+                        >Teacher's Course ID:
+                    </span>
+                    <span id="teacherCid" class="text-blue-600 font-bold"
+                        >Loading...</span
+                    >
+                </div>
 
-    <script>
-        document.getElementById("timeframe").addEventListener("change", fetchReport);
+                <div class="flex justify-end mb-4">
+                    <label
+                        for="timeframe"
+                        class="mr-2 font-medium text-gray-700"
+                        >Timeframe:</label
+                    >
+                    <select
+                        id="timeframe"
+                        class="border border-gray-300 rounded px-3 py-1"
+                    >
+                        <option value="">All Time</option>
+                        <option value="weekly">This Week</option>
+                        <option value="monthly">This Month</option>
+                    </select>
+                </div>
 
-        function fetchReport() {
-            const timeframe = document.getElementById("timeframe").value;
-            let url = "/quiz_report";
-            if (timeframe) {
-                url += `?timeframe=${timeframe}`;
-            }
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-white border border-gray-300">
+                        <thead class="bg-gray-200 text-gray-700">
+                            <tr>
+                                <th class="px-4 py-2 border">Roll No</th>
+                                <th class="px-4 py-2 border">Name</th>
+                                <th class="px-4 py-2 border">Quiz ID</th>
+                                <th class="px-4 py-2 border">Course ID</th>
+                                <!-- New Column -->
+                                <th class="px-4 py-2 border">Marks</th>
+                                <th class="px-4 py-2 border">Submitted At</th>
+                            </tr>
+                        </thead>
+                        <tbody id="reportBody" class="text-sm text-gray-800">
+                            <!-- Rows will be inserted here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
 
-            fetch(url)
-                .then(res => res.json())
-                .then(data => {
-                    console.log("Data from server:", data);
-                    const tbody = document.getElementById("reportBody");
-                    tbody.innerHTML = "";
+        <script>
+            let teacherCname = ""; // Variable to store cname globally
 
-                    document.getElementById("teacherCid").textContent = data.teacherCid || 'N/A';
+            window.addEventListener("DOMContentLoaded", async () => {
+                try {
+                    const teacherResponse = await fetch("/get_teacher_info");
+                    const teacherData = await teacherResponse.json();
 
-                    if (!Array.isArray(data.reportData)) {
-                        tbody.innerHTML = '<tr><td colspan="6" class="text-center py-4 text-gray-500">Unexpected response format</td></tr>';
+                    if (teacherData.error) {
+                        window.location.href = "/pages/teacher_login.html";
                         return;
                     }
 
-                    if (data.reportData.length === 0) {
-                        tbody.innerHTML = '<tr><td colspan="6" class="text-center py-4 text-gray-500">No records found</td></tr>';
-                        return;
-                    }
+                    teacherCname = teacherData.cname || "";
+                    document.getElementById(
+                        "teacherCid"
+                    ).textContent = `${teacherData.cid}: ${teacherCname}`;
 
-                    data.reportData.forEach(row => {
-                        const tr = document.createElement("tr");
-                        tr.innerHTML = `
+                    fetchReport();
+                } catch (err) {
+                    console.error("Error fetching teacher info:", err);
+                }
+            });
+
+            document
+                .getElementById("timeframe")
+                .addEventListener("change", fetchReport);
+
+            function fetchReport() {
+                const timeframe = document.getElementById("timeframe").value;
+                let url = "/quiz_report";
+                if (timeframe) {
+                    url += `?timeframe=${timeframe}`;
+                }
+
+                fetch(url)
+                    .then((res) => res.json())
+                    .then((data) => {
+                        console.log("Data from server:", data);
+                        const tbody = document.getElementById("reportBody");
+                        tbody.innerHTML = "";
+
+                        document.getElementById("teacherCid").textContent =
+                            `${data.teacherCid}: ${teacherCname}` || "N/A";
+
+                        if (!Array.isArray(data.reportData)) {
+                            tbody.innerHTML =
+                                '<tr><td colspan="6" class="text-center py-4 text-gray-500">Unexpected response format</td></tr>';
+                            return;
+                        }
+
+                        if (data.reportData.length === 0) {
+                            tbody.innerHTML =
+                                '<tr><td colspan="6" class="text-center py-4 text-gray-500">No records found</td></tr>';
+                            return;
+                        }
+
+                        data.reportData.forEach((row) => {
+                            const tr = document.createElement("tr");
+                            tr.innerHTML = `
                             <td class="border px-4 py-2">${row.roll_no}</td>
                             <td class="border px-4 py-2">${row.name}</td>
                             <td class="border px-4 py-2">${row.quiz_id}</td>
                             <td class="border px-4 py-2">${row.cid}</td>
                             <td class="border px-4 py-2">${row.marks}</td>
-                            <td class="border px-4 py-2">${new Date(row.submitted_at).toLocaleString()}</td>
+                            <td class="border px-4 py-2">${new Date(
+                                row.submitted_at
+                            ).toLocaleString()}</td>
                         `;
-                        tbody.appendChild(tr);
+                            tbody.appendChild(tr);
+                        });
+                    })
+                    .catch((err) => {
+                        console.error("Error fetching report:", err);
                     });
-                })
-                .catch(err => {
-                    console.error("Error fetching report:", err);
-                });
-        }
+            }
 
-        window.addEventListener("DOMContentLoaded", fetchReport);
-    </script>
-</body>
+            window.addEventListener("DOMContentLoaded", fetchReport);
+        </script>
+    </body>
 </html>

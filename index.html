@@ -16,32 +16,33 @@
         class="bg-[url('/assets/background.jpg')] bg-cover bg-center min-h-screen text-gray-800 font-[Poppins]"
     >
         <!-- Header -->
-        <header class="bg-[#313D5A] text-[#faebd7] p-4 shadow-md">
-            <div class="container mx-auto flex justify-between items-center">
-                <h1 class="text-2xl font-bold font-[Roboto]">Learning Management System</h1>
-                <nav>
-                    <ul class="flex space-x-6 font-medium">
-                        <li>
-                            <a
-                                href="pages/student_login.html"
-                                class="hover:underline hover:text-gray-200"
-                                >Student Login</a
-                            >
-                        </li>
-                        <li>
-                            <a
-                                href="pages/teacher_login.html"
-                                class="hover:underline hover:text-gray-200"
-                                >Teacher Login</a
-                            >
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        </header>
+        <header
+                id="header"
+                class="flex justify-between items-center w-full h-16 bg-[#313D5A] text-[#FAEBDB] fixed top-0 left-0 z-50 shadow-lg"
+            >
+                <div id="logo" class="text-2xl font-[Poppins] ml-8">
+                    Learning Management System
+                </div>
+                <ul id="logins" class="flex space-x-6 mr-8">
+                    <li class="text-lg font-[Poppins]">
+                        <a
+                            href="/pages/student_login.html"
+                            class="text-[#FAEBDB] hover:text-gray-200"
+                            >Student Login</a
+                        >
+                    </li>
+                    <li class="text-lg font-[Poppins]">
+                        <a
+                            href="/pages/teacher_login.html"
+                            class="text-[#FAEBDB] hover:text-gray-200"
+                            >Teacher Login</a
+                        >
+                    </li>
+                </ul>
+            </header>
 
         <!-- Main Content -->
-        <main class="container mx-auto px-4 py-10">
+        <main class="container mx-auto mt-24 px-4 py-10">
             <h2 class="text-5xl font-semibold text-gray-900 text-center mb-8">
                 Welcome to the Learning Management System
             </h2>

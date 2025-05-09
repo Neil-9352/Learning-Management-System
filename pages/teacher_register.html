@@ -4,76 +4,157 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <link rel="stylesheet" href="/css/teacher_registration.css" />
-        <link rel="stylesheet" href="/css/header.css" />
-        <link rel="stylesheet" href="/css/output.css">
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+            rel="stylesheet"
+        />
+
+        <link rel="stylesheet" href="/css/output.css" />
         <script defer src="/js/teacher_register.js"></script>
         <title>Teacher Registration</title>
     </head>
-    <body>
-        <header id="header">
-            <div id="logo">Learning Management System</div>
-            <ul id="logins">
-                <li><a href="/index.html">Home</a></li>
-                <li><a href="/pages/student_login.html">Student Login</a></li>
-            </ul>
-        </header>
+    <body class="bg-gray-100 min-h-screen flex flex-col">
+        <body class="bg-gray-100 h-screen flex flex-col">
+            <!-- Fixed Header -->
+            <header
+                id="header"
+                class="flex justify-between items-center w-full h-16 bg-[#313D5A] text-[#FAEBDB] fixed top-0 left-0 z-50 shadow-lg"
+            >
+                <div id="logo" class="text-2xl font-[Poppins] ml-8">
+                    Learning Management System
+                </div>
+                <ul id="logins" class="flex space-x-6 mr-8">
+                    <li class="text-lg font-[Poppins]">
+                        <a
+                            href="/index.html"
+                            class="text-[#FAEBDB] hover:text-gray-200"
+                            >Home</a
+                        >
+                    </li>
+                    <li class="text-lg font-[Poppins]">
+                        <a
+                            href="student_login.html"
+                            class="text-[#FAEBDB] hover:text-gray-200"
+                            >Student Login</a
+                        >
+                    </li>
+                </ul>
+            </header>
 
-        <main id="teacher-register-container">
-            <div id="login">
-                <h1>Teacher Registration</h1>
-                <form id="register-form">
-                    <label for="name">Name</label>
-                    <input
-                        type="text"
-                        id="name"
-                        placeholder="Enter your name"
-                        required
-                    />
+        <main
+            class="flex-grow flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-gray-200"
+        >
+            <div class="max-w-md w-full bg-white mb-8 mt-[40px] p-8 rounded-lg shadow-md font-[Poppins]">
+                <h1 class="text-2xl font-bold text-center text-gray-800 mb-6">
+                    Teacher Registration
+                </h1>
+                <form id="register-form" class="space-y-4">
+                    <div>
+                        <label
+                            for="name"
+                            class="block text-sm font-medium text-gray-700"
+                            >Name</label
+                        >
+                        <input
+                            type="text"
+                            id="name"
+                            placeholder="Enter your name"
+                            required
+                            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-[25px] shadow-sm focus:outline-none focus:ring focus:ring-blue-200"
+                        />
+                    </div>
 
-                    <label for="email">Email</label>
-                    <input
-                        type="email"
-                        id="email"
-                        placeholder="Enter your email"
-                        required
-                    />
+                    <div>
+                        <label
+                            for="email"
+                            class="block text-sm font-medium text-gray-700"
+                            >Email</label
+                        >
+                        <input
+                            type="email"
+                            id="email"
+                            placeholder="Enter your email"
+                            required
+                            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-[25px] shadow-sm focus:outline-none focus:ring focus:ring-blue-200"
+                        />
+                    </div>
 
-                    <label for="username">Username</label>
-                    <input
-                        type="text"
-                        id="username"
-                        placeholder="Enter your username"
-                        required
-                    />
+                    <div>
+                        <label
+                            for="username"
+                            class="block text-sm font-medium text-gray-700"
+                            >Username</label
+                        >
+                        <input
+                            type="text"
+                            id="username"
+                            placeholder="Enter your username"
+                            required
+                            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-[25px] shadow-sm focus:outline-none focus:ring focus:ring-blue-200"
+                        />
+                    </div>
 
-                    <label for="password">Password</label>
-                    <input
-                        type="password"
-                        id="password"
-                        placeholder="Enter your password"
-                        required
-                    />
+                    <div>
+                        <label
+                            for="password"
+                            class="block text-sm font-medium text-gray-700"
+                            >Password</label
+                        >
+                        <input
+                            type="password"
+                            id="password"
+                            placeholder="Enter your password"
+                            required
+                            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-[25px] shadow-sm focus:outline-none focus:ring focus:ring-blue-200"
+                        />
+                    </div>
 
-                    <label for="confirmPassword">Confirm Password</label>
-                    <input
-                        type="password"
-                        id="confirmPassword"
-                        placeholder="Confirm your password"
-                        required
-                    />
+                    <div>
+                        <label
+                            for="confirmPassword"
+                            class="block text-sm font-medium text-gray-700"
+                            >Confirm Password</label
+                        >
+                        <input
+                            type="password"
+                            id="confirmPassword"
+                            placeholder="Confirm your password"
+                            required
+                            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-[25px] shadow-sm focus:outline-none focus:ring focus:ring-blue-200"
+                        />
+                    </div>
 
-                    <label for="course">Select Course</label>
-                    <select id="course" required>
-                        <option value="">Loading Courses...</option>
-                    </select>
+                    <div>
+                        <label
+                            for="course"
+                            class="block text-sm font-medium text-gray-700"
+                            >Select Course</label
+                        >
+                        <select
+                            id="course"
+                            required
+                            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-[25px] shadow-sm focus:outline-none focus:ring focus:ring-blue-200"
+                        >
+                            <option value="">Loading Courses...</option>
+                        </select>
+                    </div>
 
-                    <input type="submit" value="Register" />
+                    <div>
+                        <input
+                            type="submit"
+                            value="Register"
+                            class="w-full bg-blue-600 text-white py-2 px-4 rounded-[25px] hover:bg-blue-700 cursor-pointer transition duration-200"
+                        />
+                    </div>
                 </form>
 
-                <p>
+                <p class="text-sm text-center text-gray-600 mt-4">
                     Already registered?
-                    <a href="teacher_login.html">Log in here.</a>
+                    <a
+                        href="teacher_login.html"
+                        class="text-blue-600 hover:underline font-semibold"
+                        >Log in here.</a
+                    >
                 </p>
             </div>
         </main>

@@ -7,26 +7,13 @@ window.onload = async function () {
             window.location.href = "/pages/teacher_login.html"; // Redirect if not logged in
         } else {
             document.getElementById("teacher-name").textContent = data.name;
+            document.getElementById("teacher-course").textContent = `${data.cid}: ${data.cname}`;
             loadMaterials(); // Load uploaded materials
         }
     } catch (error) {
         console.error("Error fetching teacher info:", error);
     }
 };
-
-// Logout Handling
-document.getElementById("logout-link").addEventListener("click", async () => {
-    try {
-        const response = await fetch("/logout");
-        if (response.redirected) {
-            window.location.href = response.url; // Redirect after logout
-        } else {
-            alert("Logout failed");
-        }
-    } catch (error) {
-        console.error("Logout error:", error);
-    }
-});
 
 // File Upload Handling
 document.getElementById("upload-form").addEventListener("submit", async (event) => {
@@ -74,10 +61,21 @@ async function loadMaterials() {
 
         materials.forEach(material => {
             const listItem = document.createElement("li");
+            listItem.classList.add("mb-2")
             const link = document.createElement("a");
             link.href = material.document;
             link.textContent = material.document.split("/").pop();
             link.target = "_blank";
+
+            link.classList.add(
+                "text-blue-600",
+                "hover:underline",
+                "hover:text-blue-800",
+                "transition",
+                "duration-150",
+                "ease-in-out",
+                "font-semibold",
+            );
 
             listItem.appendChild(link);
             materialsList.appendChild(listItem);

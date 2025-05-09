@@ -4,165 +4,176 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Quiz Management</title>
-        <!-- <link rel="stylesheet" href="/css/header.css" />
-        <link rel="stylesheet" href="/css/navbar.css" />
-        <link rel="stylesheet" href="/css/quiz_management.css" /> -->
-        <link rel="stylesheet" href="/css/output.css">
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="/css/output.css" />
         <script defer src="/js/quiz_management.js"></script>
     </head>
-    <!-- <body>
-        <header id="header">
-            <div id="logo">Learning Management System</div>
-            <ul id="logins">
-                <li><a href="../index.html">Home</a></li>
-                <li><a href="#" id="logout-link">Logout</a></li>
-            </ul>
-        </header>
+    <body class="bg-gray-100">
+        <!-- Fixed Header -->
+        <header
+                id="header"
+                class="flex justify-between items-center w-full h-16 bg-[#313D5A] text-[#FAEBDB] fixed top-0 left-0 z-50 shadow-lg"
+            >
+                <div id="logo" class="text-2xl font-[Poppins] ml-8">
+                    Learning Management System
+                </div>
+                <ul id="logins" class="flex space-x-6 mr-8">
+                    <li class="text-lg font-[Poppins]">
+                        <a
+                            href="/index.html"
+                            class="text-[#FAEBDB] hover:text-gray-200"
+                            >Home</a
+                        >
+                    </li>
+                    <li class="text-lg font-[Poppins]">
+                        <a
+                            href="/logout"
+                            class="text-[#FAEBDB] hover:text-gray-200"
+                            >Logout</a
+                        >
+                    </li>
+                </ul>
+            </header>
 
-        <main id="main">
-            <nav id="nav">
-                <ul>
-                    <li><a href="teacher_dashboard.html">Courses</a></li>
-                    <li><a href="quiz_management.html">Quizzes</a></li>
+        <!-- Main Content -->
+        <main id="main" class="flex pt-20 pl-64">
+            <!-- Fixed Side Navigation -->
+            <nav
+                id="nav"
+                class="bg-gray-800 text-white w-64 min-h-screen p-4 fixed top-0 left-0 z-40"
+            >
+                <ul class="mt-16 space-y-2">
+                    <li>
+                        <a
+                            href="teacher_dashboard.html"
+                            class="block py-2 px-4 hover:bg-gray-700 rounded"
+                            >Courses</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="quiz_management.html"
+                            class="block py-2 px-4 bg-blue-700 rounded"
+                            >Quizzes</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="quiz_report.html"
+                            class="block py-2 px-4 hover:bg-gray-700 rounded"
+                            >Quiz Report</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="teacher_doubts.html"
+                            class="block py-2 px-4 hover:bg-gray-700 rounded"
+                            >Student Doubts</a
+                        >
+                    </li>
                 </ul>
             </nav>
 
-            <div class="display">
-                <h1>Quiz Management</h1>
-                <form id="quiz-form">
-                    <div id="questions-container">
-                        <div class="question-block">
-                            <label>Question 1:</label>
-                            <input type="text" class="question" required />
+            <!-- Main Content Area -->
+            <div class="flex-1 p-8 ml-0">
+                <h1 class="text-3xl font-bold text-gray-800">
+                    Quiz Management
+                </h1>
 
-                            <label>Options:</label>
-                            <div class="options-container">
+                <!-- Quiz Form -->
+                <form id="quiz-form" class="mt-8">
+                    <div id="questions-container" class="space-y-6">
+                        <div
+                            class="question-block bg-white p-6 rounded-lg shadow-md"
+                        >
+                            <label class="block font-medium">Question 1:</label>
+                            <input
+                                type="text"
+                                class="question w-full p-2 mt-2 border border-gray-300 rounded"
+                                required
+                            />
+
+                            <label class="block mt-4 font-medium"
+                                >Options:</label
+                            >
+                            <div class="options-container space-y-4">
                                 <input
                                     type="text"
-                                    class="option"
+                                    class="option w-full p-2 border border-gray-300 rounded"
                                     placeholder="Option A"
                                     required
                                 />
                                 <input
                                     type="text"
-                                    class="option"
+                                    class="option w-full p-2 border border-gray-300 rounded"
                                     placeholder="Option B"
                                     required
                                 />
                                 <input
                                     type="text"
-                                    class="option"
+                                    class="option w-full p-2 border border-gray-300 rounded"
                                     placeholder="Option C"
                                     required
                                 />
                                 <input
                                     type="text"
-                                    class="option"
+                                    class="option w-full p-2 border border-gray-300 rounded"
                                     placeholder="Option D"
                                     required
                                 />
                             </div>
 
-                            <label>Correct Answer:</label>
-                            <select class="correct-answer" required>
+                            <label class="block mt-4 font-medium"
+                                >Correct Answer:</label
+                            >
+                            <select
+                                class="correct-answer w-full p-2 mt-2 border border-gray-300 rounded"
+                                required
+                            >
                                 <option value="A">A</option>
                                 <option value="B">B</option>
                                 <option value="C">C</option>
                                 <option value="D">D</option>
                             </select>
 
-                            <button type="button" class="remove-question">
+                            <button
+                                type="button"
+                                class="remove-question mt-4 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded cursor-pointer"
+                            >
                                 Remove
                             </button>
                         </div>
                     </div>
 
-                    <div class="button-group">
-                        <button type="button" id="add-question">
+                    <div class="button-group mt-6 space-x-4">
+                        <button
+                            type="button"
+                            id="add-question"
+                            class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded cursor-pointer"
+                        >
                             Add Another Question
                         </button>
-                        <button type="submit">Submit Quiz</button>
+                        <button
+                            type="submit"
+                            class="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded cursor-pointer"
+                        >
+                            Submit Quiz
+                        </button>
                     </div>
                 </form>
 
-                <h2>Your Uploaded Quizzes</h2>
-                <div id="quiz-list"></div>
+                <!-- Quiz List -->
+                <h2 class="text-2xl font-bold mt-12 mb-4 text-gray-800">
+                    Your Uploaded Quizzes
+                </h2>
+                <div id="quiz-list" class="space-y-6">
+                    <!-- Example Quiz Item -->
+                    <!-- The quiz items will be dynamically loaded here -->
+                </div>
             </div>
         </main>
-    </body> -->
-    <body class="bg-gray-100">
-        <!-- Fixed Header -->
-    <header id="header" class="bg-blue-600 text-white p-4 fixed top-0 left-0 w-full z-50 shadow-md">
-        <div class="flex justify-between items-center">
-            <div id="logo" class="text-xl font-bold">Learning Management System</div>
-            <ul id="logins" class="flex space-x-4">
-                <li><a href="../index.html" class="text-white hover:text-gray-200">Home</a></li>
-                <li><a href="#" id="logout-link" class="text-white hover:text-gray-200">Logout</a></li>
-            </ul>
-        </div>
-    </header>
-
-    <!-- Main Content -->
-    <main id="main" class="flex pt-20 pl-64">
-        <!-- Fixed Side Navigation -->
-        <nav id="nav" class="bg-gray-800 text-white w-64 min-h-screen p-4 fixed top-0 left-0 z-40">
-            <ul class="mt-16 space-y-2">
-                <li><a href="teacher_dashboard.html" class="block py-2 px-4 hover:bg-gray-700 rounded">Courses</a></li>
-                <li><a href="quiz_management.html" class="block py-2 px-4 bg-blue-700 rounded ">Quizzes</a></li>
-                <li><a href="quiz_report.html" class="block py-2 px-4 bg-blue-700 rounded ">Quiz Report</a></li>
-            </ul>
-        </nav>
-
-        <!-- Main Content Area -->
-        <div class="flex-1 p-8 ml-0">
-            <h1 class="text-3xl font-bold text-gray-800">Quiz Management</h1>
-            
-            <!-- Quiz Form -->
-            <form id="quiz-form" class="mt-8">
-                <div id="questions-container" class="space-y-6">
-                    <div class="question-block bg-white p-6 rounded-lg shadow-md">
-                        <label class="block font-medium">Question 1:</label>
-                        <input type="text" class="question w-full p-2 mt-2 border border-gray-300 rounded" required />
-                        
-                        <label class="block mt-4 font-medium">Options:</label>
-                        <div class="options-container space-y-4">
-                            <input type="text" class="option w-full p-2 border border-gray-300 rounded" placeholder="Option A" required />
-                            <input type="text" class="option w-full p-2 border border-gray-300 rounded" placeholder="Option B" required />
-                            <input type="text" class="option w-full p-2 border border-gray-300 rounded" placeholder="Option C" required />
-                            <input type="text" class="option w-full p-2 border border-gray-300 rounded" placeholder="Option D" required />
-                        </div>
-                        
-                        <label class="block mt-4 font-medium">Correct Answer:</label>
-                        <select class="correct-answer w-full p-2 mt-2 border border-gray-300 rounded" required>
-                            <option value="A">A</option>
-                            <option value="B">B</option>
-                            <option value="C">C</option>
-                            <option value="D">D</option>
-                        </select>
-
-                        <button type="button" class="remove-question mt-4 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded">
-                            Remove
-                        </button>
-                    </div>
-                </div>
-
-                <div class="button-group mt-6 space-x-4">
-                    <button type="button" id="add-question" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded">
-                        Add Another Question
-                    </button>
-                    <button type="submit" class="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded">
-                        Submit Quiz
-                    </button>
-                </div>
-            </form>
-
-            <!-- Quiz List -->
-            <h2 class="text-2xl font-bold mt-12 mb-4 text-gray-800">Your Uploaded Quizzes</h2>
-            <div id="quiz-list" class="space-y-6">
-                <!-- Example Quiz Item -->
-                <!-- The quiz items will be dynamically loaded here -->
-            </div>
-        </div>
-    </main>
     </body>
 </html>

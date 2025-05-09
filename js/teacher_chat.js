@@ -17,8 +17,9 @@ document.addEventListener("DOMContentLoaded", () => {
         studentId
     )}`;
 
-    // Load existing messages
-    fetchMessages();
+    // Fetch the existing messages when the page loads
+    fetchMessages(); // Fetch messages when the page loads
+    setInterval(fetchMessages, 2000); // Fetch messages every 2 seconds
 
     sendMessageButton.addEventListener("click", () => {
         const message = messageInput.value.trim();
@@ -80,7 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 "max-w-xl",
                 "w-fit",
                 "break-words",
-                "my-2"
+                "my-2",
             );
 
             // Add classes to style based on the sender role
@@ -115,15 +116,18 @@ document.addEventListener("DOMContentLoaded", () => {
             messagesArea.appendChild(messageDiv); // Add the message div to the messages area
         });
 
-        // Delay the scroll to the last message using setTimeout (1 second)
         setTimeout(() => {
             const lastMessage = messagesArea.lastElementChild;
             if (lastMessage) {
-                lastMessage.scrollIntoView({
-                    behavior: "smooth",
-                    block: "end",
+                const offset = 32; // 2rem in pixels
+                const scrollTarget = lastMessage.offsetTop - messagesArea.offsetTop - offset;
+        
+                messagesArea.scrollTo({
+                    top: scrollTarget,
+                    behavior: "smooth"
                 });
             }
-        }, 1000); // 1 second delay
+        }, 1000);
+        
     }
 });

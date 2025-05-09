@@ -1,19 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="/css/output.css">
-    <script src="/js/teacher_doubts.js"></script>
-</head>
-<body class="bg-gray-100">
-    <main class="container mx-auto p-6">
-        <h1 class="text-2xl font-bold mb-6">Students Who Asked Doubts</h1>
-        <ul id="students-list" class="space-y-4 bg-white p-6 rounded shadow">
-            <!-- Student links will go here -->
-        </ul>
-    </main>
-</body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="/css/output.css" />
+        <script src="/js/teacher_doubts.js"></script>
+    </head>
+    <body class="bg-gray-100">
+        <header
+            id="header"
+            class="flex justify-between items-center w-full h-16 bg-[#313D5A] text-[#FAEBDB] fixed top-0 left-0 z-50 shadow-lg"
+        >
+            <div id="logo" class="text-2xl font-[Poppins] ml-8">
+                Learning Management System
+            </div>
+            <ul id="logins" class="flex space-x-6 mr-8">
+                <li class="text-lg font-[Poppins]">
+                    <a
+                        href="/index.html"
+                        class="text-[#FAEBDB] hover:text-gray-200"
+                        >Home</a
+                    >
+                </li>
+                <li class="text-lg font-[Poppins]">
+                    <a href="/logout" class="text-[#FAEBDB] hover:text-gray-200"
+                        >Logout</a
+                    >
+                </li>
+            </ul>
+        </header>
 
+        <main class="flex pt-20 pl-64">
+            <nav id="nav" class="bg-gray-800 text-white w-64 min-h-screen p-4 fixed top-0 left-0 z-40">
+                <ul class="mt-16 space-y-2">
+                    <li><a href="teacher_dashboard.html" class="block py-2 px-4 hover:bg-gray-700 rounded">Courses</a></li>
+                    <li><a href="quiz_management.html" class="block py-2 px-4 hover:bg-gray-700 rounded">Quizzes</a></li>
+                    <li><a href="quiz_report.html" class="block py-2 px-4 hover:bg-gray-700 rounded">Quiz Report</a></li>
+                    <li><a href="teacher_doubts.html" class="block py-2 px-4 bg-blue-700 rounded">Student Doubts</a></li>
+                </ul>
+            </nav>
+
+            <div class="container mx-auto p-6">
+                <h1 class="text-2xl font-bold mb-6">
+                    Students Enrolled in the Course
+                </h1>
+                <ul
+                    id="students-list"
+                    class="space-y-4 bg-white p-6 rounded shadow"
+                >
+                    <!-- Student links will go here -->
+                </ul>
+            </div>
+        </main>
+    </body>
 </html>

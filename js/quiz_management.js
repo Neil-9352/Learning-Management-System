@@ -137,45 +137,53 @@ async function fetchQuizzes() {
 
         data.quizzes.forEach((quiz, serialIndex) => {
             const quizItem = document.createElement("div");
-            quizItem.classList.add("quiz-item");
+            quizItem.className = "quiz-item bg-gray-100 rounded-lg p-4 mb-8";
 
-            let questionsHTML = "";
-            const questions = quiz.questions;
+            const quizHeader = document.createElement("h2");
+            quizHeader.className = "text-2xl font-bold text-blue-700 mb-4";
+            quizHeader.textContent = `Quiz #${serialIndex + 1}`;
+            quizItem.appendChild(quizHeader);
 
-            const parsedQuestions =
-                typeof questions === "string"
-                    ? JSON.parse(questions)
-                    : questions;
+            const questions =
+                typeof quiz.questions === "string"
+                    ? JSON.parse(quiz.questions)
+                    : quiz.questions;
 
-            parsedQuestions.forEach((q, index) => {
-                questionsHTML += `
-                    <div class="question-block">
-                        <strong>Q${index + 1}:</strong> ${q.question}<br>
-                        A: ${q.options.A}<br>
-                        B: ${q.options.B}<br>
-                        C: ${q.options.C}<br>
-                        D: ${q.options.D}<br>
-                        <em>Correct: ${q.correct}</em>
-                        <hr>
-                    </div>
+            questions.forEach((q, index) => {
+                const questionCard = document.createElement("div");
+                questionCard.className =
+                    "bg-white shadow-md rounded-lg px-4 py-4 mb-4 border border-gray-300";
+
+                questionCard.innerHTML = `
+                    <p class="font-semibold text-gray-900 mb-2">Q${
+                        index + 1
+                    }: ${q.question}</p>
+                    <ul class="list-disc pl-5 text-gray-800">
+                        <li><strong>A:</strong> ${q.options.A}</li>
+                        <li><strong>B:</strong> ${q.options.B}</li>
+                        <li><strong>C:</strong> ${q.options.C}</li>
+                        <li><strong>D:</strong> ${q.options.D}</li>
+                    </ul>
+                    <p class="mt-3 text-green-600"><em>Correct Answer:</em> ${
+                        q.correct
+                    }</p>
                 `;
+
+                quizItem.appendChild(questionCard);
             });
 
-            quizItem.innerHTML = `
-                <p><strong>Quiz #${serialIndex + 1}</strong></p>
-                ${questionsHTML}
-                <button class="delete-quiz" data-id="${
-                    quiz.quiz_id
-                }">Delete</button>
-            `;
+            const deleteButton = document.createElement("button");
+            deleteButton.className =
+                "delete-quiz mt-4 bg-red-500 hover:bg-red-600 text-white font-semibold px-4 py-2 rounded shadow-md transition-colors";
+            deleteButton.textContent = "🗑️ Delete Quiz";
+            deleteButton.dataset.id = quiz.quiz_id;
 
-            quizItem
-                .querySelector(".delete-quiz")
-                .addEventListener("click", async function () {
-                    await deleteQuiz(quiz.quiz_id);
-                    fetchQuizzes(); // Refresh list
-                });
+            deleteButton.addEventListener("click", async function () {
+                await deleteQuiz(quiz.quiz_id);
+                fetchQuizzes(); // Refresh
+            });
 
+            quizItem.appendChild(deleteButton);
             quizListContainer.appendChild(quizItem);
         });
     } catch (error) {
@@ -194,19 +202,5 @@ async function deleteQuiz(quizId) {
         console.error("Error deleting quiz:", error);
     }
 }
-
-// Logout Handling
-document.getElementById("logout-link").addEventListener("click", async () => {
-    try {
-        const response = await fetch("/logout");
-        if (response.redirected) {
-            window.location.href = response.url; // Redirect after logout
-        } else {
-            alert("Logout failed");
-        }
-    } catch (error) {
-        console.error("Logout error:", error);
-    }
-});
 
 fetchQuizzes();

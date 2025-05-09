@@ -1,3 +1,16 @@
+window.onload = async function() {
+    try {
+        const response = await fetch("/get_student_info");
+        const data = await response.json();
+        if (data.error) {
+            window.location.href = "/pages/student_login.html"; // Redirect if not logged in
+        }
+    } catch (error) {
+        console.error("Error fetching student info:", error);
+
+    }
+}
+
 document.addEventListener("DOMContentLoaded", function () {
     const sendMessageButton = document.getElementById("send-message");
     const messageInput = document.getElementById("message");
@@ -9,7 +22,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const fetchMessagesUrl = `/student/chat/messages?cid=${courseId}`; // Fetch messages specific to the course
 
     // Fetch the existing messages when the page loads
-    fetchMessages();
+    fetchMessages(); // Fetch messages when the page loads
+    setInterval(fetchMessages, 2000); // Fetch messages every 2 seconds
 
     // Send a message when the "Send" button is clicked
     sendMessageButton.addEventListener("click", function () {
@@ -110,15 +124,18 @@ document.addEventListener("DOMContentLoaded", function () {
             messagesArea.appendChild(messageDiv); // Add the message div to the messages area
         });
 
-        // Delay the scroll to the last message using setTimeout (1 second)
         setTimeout(() => {
             const lastMessage = messagesArea.lastElementChild;
             if (lastMessage) {
-                lastMessage.scrollIntoView({
-                    behavior: "smooth",
-                    block: "end",
+                const offset = 32; // 2rem in pixels
+                const scrollTarget = lastMessage.offsetTop - messagesArea.offsetTop - offset;
+        
+                messagesArea.scrollTo({
+                    top: scrollTarget,
+                    behavior: "smooth"
                 });
             }
-        }, 1000); // 1 second delay
+        }, 1000);
+        
     }
 });

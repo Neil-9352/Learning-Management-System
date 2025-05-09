@@ -4,33 +4,52 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Student Chat</title>
+    <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+            rel="stylesheet"
+        />
     <script defer src="/js/student_chat.js"></script>
     <!-- Include Tailwind CSS -->
     <link rel="stylesheet" href="/css/output.css">
 </head>
 <body class="bg-gray-100 font-sans">
 
-    <header class="bg-gray-800 text-white p-4">
-        <div class="flex justify-between items-center">
-            <div class="text-xl font-semibold">Learning Management System</div>
-            <ul class="flex space-x-4">
-                <li><a href="/pages/student_dashboard.html" class="hover:text-gray-300">Dashboard</a></li>
-                <li><a href="/logout" class="hover:text-gray-300">Logout</a></li>
-            </ul>
-        </div>
-    </header>
+    <header
+                id="header"
+                class="flex justify-between items-center w-full h-16 bg-[#313D5A] text-[#FAEBDB] fixed top-0 left-0 z-50 shadow-lg"
+            >
+                <div id="logo" class="text-2xl font-[Poppins] ml-8">
+                    Learning Management System
+                </div>
+                <ul id="logins" class="flex space-x-6 mr-8">
+                    <li class="text-lg font-[Poppins]">
+                        <a
+                            href="/pages/student_dashboard.html"
+                            class="text-[#FAEBDB] hover:text-gray-200"
+                            >Go Back</a
+                        >
+                    </li>
+                    <li class="text-lg font-[Poppins]">
+                        <a
+                            href="/logout"
+                            class="text-[#FAEBDB] hover:text-gray-200"
+                            >Logout</a
+                        >
+                    </li>
+                </ul>
+            </header>
 
-    <main class="container mx-auto p-6">
+    <main class="container mt-16 mx-auto p-6">
         <h1 class="text-2xl font-bold mb-6 text-center">Chat with Your Teacher</h1>
 
         <!-- Chat Messages Area -->
-        <div id="messages-area" class="bg-white p-4 rounded-lg shadow-lg mb-6 space-y-4 h-96 overflow-y-auto">
+        <div id="messages-area" class="bg-white p-4 rounded-lg shadow-lg mb-6 space-y-4 h-[28rem] overflow-y-auto">
             <!-- Messages will be loaded here by JavaScript -->
         </div>
 
         <!-- Chat Input Area -->
         <div id="message-input" class="flex flex-col space-y-4">
-            <textarea id="message" class="p-3 border border-gray-300 rounded-lg w-full h-24 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Type your message here..." required></textarea>
+            <textarea id="message" class="p-3 border border-gray-300 rounded-lg w-full h-12 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Type your message here..." required></textarea>
             <div class="flex items-center space-x-4">
                 <input type="file" id="image-upload" accept="image/*" class="file:border-gray-300 file:bg-gray-300 file:px-4 file:py-2 file:rounded-lg" />
                 <button id="send-message" class="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">

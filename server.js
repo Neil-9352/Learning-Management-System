@@ -1,6 +1,7 @@
 const express = require("express");
 const path = require("path");
 const session = require("express-session");
+const MySQLStore = require("express-mysql-session")(session);
 const bcrypt = require("bcryptjs");
 const multer = require("multer");
 const fs = require("fs");
@@ -9,6 +10,13 @@ require("dotenv").config();
 
 const app = express();
 const PORT = 3000;
+
+const sessionStore = new MySQLStore({
+    host: process.env.DB_HOST || "localhost",
+    user: process.env.DB_USER || "root",
+    password: process.env.DB_PASSWORD || "",
+    database: process.env.DB_NAME,
+});
 
 // Middleware
 app.use(express.static(__dirname));
@@ -20,6 +28,10 @@ app.use(
         secret: process.env.SESSION_SECRET,
         resave: false,
         saveUninitialized: false,
+        store: sessionStore, // ✅ add this
+        cookie: {
+            maxAge: 1000 * 60 * 60 * 24, // Optional: 1 day session lifespan
+        },
     })
 );
 
@@ -166,8 +178,42 @@ app.get("/get_student_info", (req, res) => {
         return res.status(401).json({ error: "Not logged in" });
     }
 
-    const { name, cid1, cid2, cid3, roll_no } = req.session.user;
-    res.json({ name, cid1, cid2, cid3, roll_no });
+    if (req.session.user.role !== "student") {
+        req.session.destroy((err) => {
+            if (err) {
+                return res.status(500).json({ error: "Failed to logout" });
+            }
+            return res
+                .status(403)
+                .json({ error: "Access denied. Logged out." });
+        });
+    } else {
+        const { roll_no } = req.session.user;
+
+        const sql = `
+            SELECT s.roll_no, s.name, s.cid1, c1.cname AS cname1, 
+                   s.cid2, c2.cname AS cname2, 
+                   s.cid3, c3.cname AS cname3
+            FROM student s
+            LEFT JOIN course c1 ON s.cid1 = c1.cid
+            LEFT JOIN course c2 ON s.cid2 = c2.cid
+            LEFT JOIN course c3 ON s.cid3 = c3.cid
+            WHERE s.roll_no = ?
+        `;
+
+        db.query(sql, [roll_no], (err, results) => {
+            if (err) {
+                console.error("Database error:", err);
+                return res.status(500).json({ error: "Database error" });
+            }
+
+            if (results.length === 0) {
+                return res.status(404).json({ error: "Student not found" });
+            }
+
+            res.json(results[0]);
+        });
+    }
 });
 
 app.post("/submit_quiz", (req, res) => {
@@ -378,8 +424,33 @@ app.get("/get_teacher_info", (req, res) => {
     if (!req.session.user) {
         return res.status(401).json({ error: "Not logged in" });
     }
-    res.json({ name: req.session.user.name });
+
+    if (req.session.user.role !== "teacher") {
+        req.session.destroy((err) => {
+            if (err) {
+                return res.status(500).json({ error: "Failed to logout" });
+            }
+            return res.status(403).json({ error: "Access denied. Logged out." });
+        });
+    } else {
+        const { name, role, cid } = req.session.user;
+
+        const sql = "SELECT cname FROM course WHERE cid = ?";
+        db.query(sql, [cid], (err, result) => {
+            if (err) {
+                return res.status(500).json({ error: "Database error" });
+            }
+
+            if (result.length === 0) {
+                return res.status(404).json({ error: "Course not found" });
+            }
+
+            const cname = result[0].cname;
+            res.json({ name, role, cid, cname });
+        });
+    }
 });
+
 
 // Multer Config for File Uploads
 const storage = multer.diskStorage({
@@ -546,21 +617,17 @@ app.post("/student/chat/send", studentUpload.single("image"), (req, res) => {
         db.query(sql, [course_id], (err, result) => {
             if (err) {
                 console.error("Database error:", err);
-                return res
-                    .status(500)
-                    .json({
-                        success: false,
-                        error: "Error querying the teacher",
-                    });
+                return res.status(500).json({
+                    success: false,
+                    error: "Error querying the teacher",
+                });
             }
 
             if (result.length === 0) {
-                return res
-                    .status(404)
-                    .json({
-                        success: false,
-                        error: "No teacher found for this course",
-                    });
+                return res.status(404).json({
+                    success: false,
+                    error: "No teacher found for this course",
+                });
             }
 
             const receiver_id = result[0].uname;
@@ -582,12 +649,10 @@ app.post("/student/chat/send", studentUpload.single("image"), (req, res) => {
                 (err, result) => {
                     if (err) {
                         console.error("Database error:", err);
-                        return res
-                            .status(500)
-                            .json({
-                                success: false,
-                                error: "Database error while sending message",
-                            });
+                        return res.status(500).json({
+                            success: false,
+                            error: "Database error while sending message",
+                        });
                     }
                     res.json({ success: true });
                 }
@@ -679,12 +744,10 @@ app.get("/teacher/chat/messages", (req, res) => {
     const student_id = req.query.student_id;
 
     if (!teacher_cid || !student_id) {
-        return res
-            .status(400)
-            .json({
-                success: false,
-                error: "Missing teacher cid or student id",
-            });
+        return res.status(400).json({
+            success: false,
+            error: "Missing teacher cid or student id",
+        });
     }
 
     // First get teacher's uname (ID) using the session
@@ -776,12 +839,10 @@ app.post("/teacher/chat/send", teacherUpload.single("image"), (req, res) => {
                 ],
                 (err, result) => {
                     if (err) {
-                        return res
-                            .status(500)
-                            .json({
-                                success: false,
-                                error: "Failed to send message",
-                            });
+                        return res.status(500).json({
+                            success: false,
+                            error: "Failed to send message",
+                        });
                     }
                     res.json({ success: true });
                 }
